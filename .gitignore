@@ -1,0 +1,41 @@
+# Ignore the virtual environment (inside backend/venv/)
+backend/venv/
+
+# Ignore compiled Django migrations
+**/migrations/__pycache__/
+**/migrations/*.pyc
+**/migrations/*.pyo
+**/migrations/*.log
+
+# Ignore Python-generated files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+local_settings.py
+
+# Ignore global virtual environments (if not in backend/)
+venv/
+
+# Ignore local and sensitive configurations
+*.env
+.env
+
+# Ignore temporary database files
+*.sqlite3
+
+# Ignore IDE and operating system configurations
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Ignore Docker caches and containers
+*.log
+docker-compose.override.yml
+.env
+.dockerignore
+
+# Ignore personal files
+gitmanagment.txt
