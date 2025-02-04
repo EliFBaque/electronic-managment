@@ -41,7 +41,7 @@ docker-compose.override.yml
 
 # Ignore personal files
 gitmanagment.txt
-
+documentation.md
 # Node.js dependencies
 node_modules/
 
