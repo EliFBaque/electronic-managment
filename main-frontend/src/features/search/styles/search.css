@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+/* RepairTable Styles */
+
+.th-repairTable {
+    @apply border border-[#3a4459] px-4 py-2 text-sm text-white;
+}
+
+.td-repairTable {
+    @apply border border-[#3a4459] px-4 py-2 text-sm text-center;
+}
