@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 
+// Local imports 
 import RepairTable from './components/RepairTable';
 import Filters from './components/Filters';
 import DetailModal from './components/RepairDetailModal';
 import Paginator from './components/Paginator';
-/* Mock Data */
+
+// Mock Data 
 import { repairsMock } from './data/repairs';
 
 export default function SearchFeature() {
   const [filters, setFilters] = useState({
-    id: '',
+    numReparacion: '',
     cliente: '',
     modelo: '',
     aceptado: '',
     marca: '',
     tipo: '',
-    nroSerie: ''
+    numeroSerie: ''
   });
   
   const [selectedItem, setSelectedItem] = useState(null);
@@ -56,10 +58,6 @@ export default function SearchFeature() {
     setCurrentPage(1);
   };
 
-  {/* Does Nothing */}
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-  };
 
   return (
     <div className="p-5 bg-[#1a1f2e] w-full overflow-y-auto">

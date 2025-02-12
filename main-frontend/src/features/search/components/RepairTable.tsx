@@ -9,13 +9,13 @@ interface RepairTableProps {
 }
 
 const columns = [
-  { key: 'id', label: 'N°' },
+  { key: 'numReparacion', label: 'N°' },
   { key: "cliente", label: "Cliente" },
   { key: "telefono", label: "Teléfono" },
   { key: "tipo", label: "Tipo" },
   { key: "marca", label: "Marca" },
   { key: "modelo", label: "Modelo" },
-  { key: "nroSerie", label: "N° de Serie" },
+  { key: "numeroSerie", label: "N° de Serie" },
   { key: "fechaEntrada", label: "Entrada" },
   { key: "fechaSalida", label: "Salida" },
 ];

@@ -1,19 +1,18 @@
 import React from 'react';
 
-
 interface FiltersProps {
   filters: Record<string, string>;
   onFilterChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 const filterFields = [
-  { name: 'id', label: 'N°' },
+  { name: 'numReparacion', label: 'N°' },
   { name: 'cliente', label: 'Cliente' },
   { name: 'telefono', label: 'Telefono' },
   { name: 'tipo', label: 'Tipo' },
   { name: 'marca', label: 'Marca' },
   { name: 'modelo', label: 'Modelo' },
-  { name: 'nroSerie', label: 'N° de Serie' },
+  { name: 'numeroSerie', label: 'N° de Serie' },
   { name: 'fechaEntrada', label: 'Fecha Entrada' },
   { name: 'fechaSalida', label: 'Fecha Salida' }
 ];

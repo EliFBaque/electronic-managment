@@ -10,9 +10,6 @@ import { FaPowerOff } from "react-icons/fa6";
 import SearchFeature from '../search/SearchFeature';
 
 
-const AddRepairFeature = () => <h1 className="text-3xl font-bold">In Progress</h1>;
-const StatisticsFeature = () => <h1 className="text-3xl font-bold">In Progress</h1>;
-
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -38,8 +35,8 @@ const Sidebar: React.FC = () => {
       <div className="flex-1 text-xl bg-gray-100 text-black dark:bg-gray-900 dark:text-white">
         <Routes>
           <Route path="/buscar" element={<SearchFeature />} />
-          <Route path="/añadir" element={<AddRepairFeature />} />
-          <Route path="/configuracion" element={<StatisticsFeature />} />
+          <Route path="/añadir"/>
+          <Route path="/estadística" />
         </Routes>
       </div>
     </div>
