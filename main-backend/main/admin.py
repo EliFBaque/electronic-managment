@@ -1,7 +1,10 @@
 from django.contrib import admin
-from .models import Reparaciones, Modelo, Marca, Tipo, Aceptado, Cliente
+from .models import User, Reparaciones, Modelo, Marca, Tipo, Aceptado, Cliente
 
+class UserAdmin(admin.ModelAdmin):
+    list_display = ['username', 'email'] 
 
+admin.site.register(User, UserAdmin)
 admin.site.register(Reparaciones)
 admin.site.register(Modelo)
 admin.site.register(Marca)

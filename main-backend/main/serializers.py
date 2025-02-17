@@ -1,12 +1,34 @@
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from .models import (
+    User,
     Cliente,
     Modelo,
     Marca,
     Tipo,
     Reparaciones
-    )
+)
 
+# User Serializer
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'password']
+        extra_kwargs = {'password' : {'write_only' : True}}
+
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
+    
+class CustomUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username','password']
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    pass
+
+# Base Database serializers
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model=Cliente

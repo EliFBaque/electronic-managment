@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.viewsets import ViewSet
 from rest_framework.decorators import action
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 import requests
 import os
@@ -10,11 +10,11 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-
+# AUTH FOR GATEWAY
 class GatewayViewSet(ViewSet):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
-    @action(methods=['post'], detail=False)
+    @action(methods=['post'], detail=False, permission_classes=[AllowAny])
     def authenticate(self, request):
         if request.method == 'POST':
             auth_url = os.environ.get('URL_AUTH')
