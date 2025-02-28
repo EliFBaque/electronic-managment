@@ -50,6 +50,12 @@ class TipoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ReparacionesSerializer(serializers.ModelSerializer):
+    cliente = serializers.CharField(source='cliente.name', read_only=True)
+    marca = serializers.CharField(source='marca.name', read_only=True)
+    modelo = serializers.CharField(source='modelo.name', read_only=True)
+    tipo = serializers.CharField(source='tipo.name', read_only=True)
+    confirmation = serializers.CharField(source='confirmation.confirmation', read_only=True)
+    
     class Meta:
         model = Reparaciones
         fields = '__all__'

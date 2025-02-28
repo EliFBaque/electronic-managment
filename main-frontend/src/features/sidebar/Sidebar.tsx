@@ -8,7 +8,8 @@ import { IoStatsChart } from "react-icons/io5";
 import { FaPowerOff } from "react-icons/fa6";
 
 import SearchFeature from '../search/SearchFeature';
-
+import Login from './testinglogin';
+import { AuthProvider } from '../../context/AuthContext';
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -33,11 +34,13 @@ const Sidebar: React.FC = () => {
 
       {/* Main Content */}
       <div className="flex-1 text-xl bg-gray-100 text-black dark:bg-gray-900 dark:text-white">
+        <AuthProvider>
         <Routes>
           <Route path="/buscar" element={<SearchFeature />} />
-          <Route path="/añadir"/>
+          <Route path="/añadir" element={<Login />} />
           <Route path="/estadística" />
         </Routes>
+        </AuthProvider>
       </div>
     </div>
   );

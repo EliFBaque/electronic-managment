@@ -1,14 +1,16 @@
 from django.urls import path, include
 from rest_framework import routers
 from main import views
+from .views import ReparacionesListView
 
-router = routers.DefaultRouter()
-router.register(r'cliente', views.ClienteViewSet)
-router.register(r'modelo', views.ModeloViewSet)
-router.register(r'marca', views.MarcaViewSet)
-router.register(r'tipo', views.TipoViewSet)
-router.register(r'reparaciones', views.ReparacionesViewSet)
+# router = routers.DefaultRouter()
+# router.register(r'cliente', views.ClienteViewSet)
+# router.register(r'modelo', views.ModeloViewSet)
+# router.register(r'marca', views.MarcaViewSet)
+# router.register(r'tipo', views.TipoViewSet)
+# router.register(r'reparaciones', views.ReparacionesListView)
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('reparaciones/', ReparacionesListView.as_view(), name='reparaciones-list')
+    #path('', ReparacionesListView.as_view(), name='reparaciones-list')
 ]

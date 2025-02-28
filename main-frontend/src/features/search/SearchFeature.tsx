@@ -9,6 +9,9 @@ import Paginator from './components/Paginator';
 // Mock Data 
 import { repairsMock } from './data/repairs';
 
+// Hacer el fetch a la api, luego cuando se abra el detailmodal ahi recien hacer call de ser necesario del cliente para ver mas datos.
+
+
 export default function SearchFeature() {
   const [filters, setFilters] = useState({
     numReparacion: '',
@@ -54,6 +57,7 @@ export default function SearchFeature() {
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    
     setFilters(prev => ({ ...prev, [name]: value }));
     setCurrentPage(1);
   };

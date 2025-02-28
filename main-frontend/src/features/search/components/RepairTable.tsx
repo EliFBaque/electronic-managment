@@ -9,15 +9,15 @@ interface RepairTableProps {
 }
 
 const columns = [
-  { key: 'numReparacion', label: 'N°' },
+  { key: 'id', label: 'N°' },
   { key: "cliente", label: "Cliente" },
   { key: "telefono", label: "Teléfono" },
   { key: "tipo", label: "Tipo" },
   { key: "marca", label: "Marca" },
   { key: "modelo", label: "Modelo" },
-  { key: "numeroSerie", label: "N° de Serie" },
-  { key: "fechaEntrada", label: "Entrada" },
-  { key: "fechaSalida", label: "Salida" },
+  { key: "serial_num", label: "N° de Serie" },
+  { key: "entry_date", label: "Entrada" },
+  { key: "delivery_date", label: "Salida" },
 ];
 
 const RepairTable: React.FC<RepairTableProps> = ({ repairs, setSelectedItem }) => (
