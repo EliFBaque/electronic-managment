@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework import routers
 from main import views
-from .views import ReparacionesListView
+from .views import ReparacionesListView, ClienteListView
 
 # router = routers.DefaultRouter()
 # router.register(r'cliente', views.ClienteViewSet)
@@ -11,6 +11,7 @@ from .views import ReparacionesListView
 # router.register(r'reparaciones', views.ReparacionesListView)
 
 urlpatterns = [
-    path('reparaciones/', ReparacionesListView.as_view(), name='reparaciones-list')
+    path('reparaciones/', ReparacionesListView.as_view(), name='reparaciones-list'),
+    path('cliente/', ClienteListView.as_view(), name='cliente-list'),
     #path('', ReparacionesListView.as_view(), name='reparaciones-list')
 ]

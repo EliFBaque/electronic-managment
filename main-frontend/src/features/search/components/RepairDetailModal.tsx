@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // React Icons imports
 import { IoMdClose } from 'react-icons/io';
 import { MdOutlineEdit } from 'react-icons/md';
-
+import ClientDetail from './ClientDetail';
 import Field from './Field';
 
 // Interfaces
@@ -13,57 +13,59 @@ interface DetailModalProps {
 }
 
 interface FormData {
-  numReparacion: string;
+  id: string;
+  cliente: string;
   tipo: string;
   marca: string;
-  fechaEntrada: string;
+  entry_date: string;
   modelo: string;
   fechaPresupuesto: string;
-  numeroSerie: string;
-  fechaSalida: string;
-  falla: string;
-  reparacion: string;
-  costoRepuesto: string;
-  manoObra: string;
-  costoPendiente: string;
+  serial_num: string;
+  delivery_date: string;
+  failure: string;
+  repair: string;
+  spare_cost: string;
+  labor_cost: string;
+  pending_payment: string;
 };
 
 const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem }) => {
   const [editMode, setEditMode] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState<FormData>({
-    numReparacion: "",
+    id: "",
+    cliente: "",
     tipo: "",
     marca: "",
-    fechaEntrada: "",
+    entry_date: "",
     modelo: "",
     fechaPresupuesto: "",
-    numeroSerie: "",
-    fechaSalida: "",
-    falla: "",
-    reparacion: "",
-    costoRepuesto: "",
-    manoObra: "",
-    costoPendiente: "",
+    serial_num: "",
+    delivery_date: "",
+    failure: "",
+    repair: "",
+    spare_cost: "",
+    labor_cost: "",
+    pending_payment: "",
   })
 
   useEffect(() => {
     if (selectedItem) {
       setFormData({
-        numReparacion: selectedItem.numReparacion || "",
-        tipo: selectedItem.tipo || "",
-        marca: selectedItem.marca || "",
-        fechaEntrada: selectedItem.fechaEntrada || "",
-        modelo: selectedItem.modelo || "",
-        fechaPresupuesto: selectedItem.fechaPresupuesto || "",
-        numeroSerie: selectedItem.numeroSerie || "",
-        fechaSalida: selectedItem.fechaSalida || "",
-        falla: selectedItem.falla || "",
-        reparacion: selectedItem.reparacion || "",
-        costoRepuesto: selectedItem.costoRepuesto?.toString() || "",
-        manoObra: selectedItem.manoObra?.toString() || "",
-        costoPendiente: selectedItem.costoPendiente?.toString() || "",
+        id: selectedItem.id || "-",
+        cliente: selectedItem.cliente || "-",
+        tipo: selectedItem.tipo || "-",
+        marca: selectedItem.marca || "-",
+        entry_date: selectedItem.entry_date || "-",
+        modelo: selectedItem.modelo || "-",
+        fechaPresupuesto: selectedItem.fechaPresupuesto || "-",
+        serial_num: selectedItem.serial_num || "-",
+        delivery_date: selectedItem.delivery_date || "-",
+        failure: selectedItem.failure || "-",
+        repair: selectedItem.repair || "-",
+        spare_cost: selectedItem.spare_cost?.toString() || "-",
+        labor_cost: selectedItem.labor_cost?.toString() || "-",
+        pending_payment: selectedItem.pending_payment?.toString() || "-",
       });
     }
   }, [selectedItem]);
@@ -100,7 +102,7 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem
   return (
     <div className="fixed inset-0 flex items-center justify-center h-screen bg-black/70">
       {/* Table container */}
-      <div className="relative bg-[#1a1f2e] shadow-lg rounded-xl p-6 w-[600px] h-auto flex flex-col m-3 justify-between">
+      <div className="relative bg-[#1a1f2e] shadow-lg rounded-xl p-6 w-[600px] h-180 flex flex-col m-3 justify-between">
         {/* Edit and Close buttons */}
         <div className="flex justify-between w-full bg-gray-200 rounded-lg">
           <button className="absolute top-2 right-2 text-white" onClick={() => setSelectedItem(null)}>
@@ -110,48 +112,41 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem
             <MdOutlineEdit size={20} />
           </button>
         </div>
-
         {/* First Row */}
         <div className="grid grid-cols-3 gap-4">
-          <Field label="N°" value={formData.numReparacion} name="numReparacion" onChange={handleChange} isEditing={editMode} />
+          <Field label="N°" value={formData.id} name="id" onChange={handleChange} isEditing={editMode} />
           <div className="col-span-2">
             <Field label="Tipo" name='tipo' onChange={handleChange} value={formData.tipo} isEditing={editMode} />
           </div>
         </div>
-
         {/* Second Row */}
         <div className="grid grid-cols-2 gap-4 mt-4">
           <Field label="Marca" name='marca' onChange={handleChange} value={formData.marca} isEditing={editMode} />
-          <Field label="Fecha de Entrada" name='fechaEntrada' onChange={handleChange} value={formData.fechaEntrada} center isEditing={editMode} />
+          <Field label="Fecha de Entrada" name='fechaEntrada' onChange={handleChange} value={formData.entry_date} center isEditing={editMode} />
         </div>
-
         {/* Third Row */}
         <div className="grid grid-cols-2 gap-4 mt-4">
           <Field label="Modelo" name='modelo' onChange={handleChange} value={formData.modelo} isEditing={editMode} />
           <Field label="Fecha de Presupuesto" name='fechaPresupuesto' onChange={handleChange} value={formData.fechaPresupuesto} center isEditing={editMode} />
         </div>
-
         {/* Fourth Row */}
         <div className="grid grid-cols-2 gap-4 mt-4">
-          <Field label="N° Serie" name='numeroSerie' onChange={handleChange} value={formData.numeroSerie} isEditing={editMode} />
-          <Field label="Fecha de Salida" name='fechaSalida' onChange={handleChange} value={formData.fechaSalida} center isEditing={editMode} />
+          <Field label="N° Serie" name='numeroSerie' onChange={handleChange} value={formData.serial_num} isEditing={editMode} />
+          <Field label="Fecha de Salida" name='fechaSalida' onChange={handleChange} value={formData.delivery_date} center isEditing={editMode} />
         </div>
-
         {/* Fifth Row */}
         <div className="mt-4">
-          <Field label="Falla" value={formData.falla} height="h-20" itemcenter scrollable isEditing={editMode} name="falla" onChange={handleChange} />
+          <Field label="Falla" value={formData.failure} height="h-20" itemcenter scrollable isEditing={editMode} name="falla" onChange={handleChange} />
         </div>
-
         {/* Sixth Row */}
         <div className="mt-4">
-          <Field label="Reparacion" value={formData.reparacion} height="h-20" itemcenter scrollable isEditing={editMode} name="reparacion" onChange={handleChange} />
+          <Field label="Reparacion" value={formData.repair} height="h-20" itemcenter scrollable isEditing={editMode} name="reparacion" onChange={handleChange} />
         </div>
-
         {/* Seventh Row */}
         <div className="flex justify-start gap-5 mt-6">
-          <Field label="Costo de repuesto" name="costoRepuesto" onChange={handleChange} value={formData.costoRepuesto.toString()} isEditing={editMode} />
-          <Field label="Mano de obra" name="manoObra" onChange={handleChange} value={formData.manoObra.toString()} isEditing={editMode} />
-          <Field label="Debe" name="debe" onChange={handleChange} value={formData.costoPendiente.toString()} isEditing={editMode} />
+          <Field label="Costo de repuesto" name="costoRepuesto" onChange={handleChange} value={`$ ${formData.spare_cost.toString()}`} isEditing={editMode} />
+          <Field label="Mano de obra" name="manoObra" onChange={handleChange} value={`$ ${formData.labor_cost.toString()}`} isEditing={editMode} />
+          <Field label="Debe" name="debe" onChange={handleChange} value={`$ ${formData.pending_payment.toString()}`} isEditing={editMode} />
         </div>
         {/* Edit Mode buttons */}
         {editMode && (
@@ -174,24 +169,11 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem
         )}
 
       </div>
-      <div className="flex items-center justify-center h-screen">
-        <button onClick={() => setIsVisible(!isVisible)} >
-          <div className="flex flex-col items-center font-bold">
-            {"Cliente".split("").map((char, index) => (
-              <p key={index}>{char}</p>
-            ))}
-          </div>
-        </button>
-        {isVisible && 
-        
-        <div className="relative bg-[#1a1f2e] shadow-lg rounded-xl p-6 w-[600px] h-auto flex flex-col m-3 justify-between">
-        </div>
-
-
-
-
-        }
-      </div>
+      {/* Cliente 
+          Agregar un transition para que se vea mas bonito
+      */}
+      <ClientDetail clienteNombre={formData.cliente} />
+      
     </div>
   )
 
