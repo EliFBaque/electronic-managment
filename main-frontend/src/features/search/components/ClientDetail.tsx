@@ -3,7 +3,7 @@ import { IoIosArrowDropright, IoIosArrowDropleft  } from "react-icons/io";
 import Field from './Field';
 import { IoMdClose } from 'react-icons/io';
 import { MdOutlineEdit } from 'react-icons/md';
-import { IoMdCheckmark } from "react-icons/io"; // Icono para guardar
+import { IoMdCheckmark } from "react-icons/io";
 
 interface Cliente {
   id: string;
@@ -23,7 +23,7 @@ interface ClienteInfoProps {
 const ClientDetail: React.FC<ClienteInfoProps> = ({ clienteNombre }) => {
   const [clienteData, setClienteData] = useState<Cliente | null>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [editMode, setEditMode] = useState(false); // Estado para edición
+  const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState<Cliente>({
     id: "",
     name: "",
@@ -52,7 +52,8 @@ const ClientDetail: React.FC<ClienteInfoProps> = ({ clienteNombre }) => {
 
       const cliente = data.length > 0 ? data[0] : null;
       setClienteData(cliente);
-      setFormData(cliente || formData); // Copia los datos al formulario si hay cliente
+      console.log(cliente, "DATOS CLIENTE")
+      setFormData(cliente || formData);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -60,7 +61,7 @@ const ClientDetail: React.FC<ClienteInfoProps> = ({ clienteNombre }) => {
 
   const handleEditToggle = () => {
     if (!editMode) {
-      setFormData(clienteData!); // Cargar datos actuales al formulario al activar edición
+      setFormData(clienteData!);
     }
     setEditMode(!editMode);
   };
@@ -72,9 +73,30 @@ const ClientDetail: React.FC<ClienteInfoProps> = ({ clienteNombre }) => {
     });
   };
 
+  const handleUpdateCliente = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/cliente/${formData.id}/`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Error al actualizar el cliente");
+      }
+  
+      const updatedCliente = await response.json();
+      setClienteData(updatedCliente);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  
   const handleSave = () => {
-    setClienteData(formData); // Guardar cambios en la vista
-    setEditMode(false); // Desactivar edición
+    handleUpdateCliente();
+    setEditMode(false);
   };
 
   return (
@@ -124,7 +146,10 @@ const ClientDetail: React.FC<ClienteInfoProps> = ({ clienteNombre }) => {
               <div className="mt-4">
                 <Field label="Contacto" value={formData.contact} name="contact" onChange={handleChange} isEditing={editMode} />
               </div>
-
+              {/* needs styling */}
+              <button onClick={handleSave}>
+                <IoMdClose size={20} />
+              </button>
             
 
             </div>

@@ -36,7 +36,6 @@ export default function SearchFeature() {
         const response = await fetch(API_URL);
         if (!response.ok) throw new Error('Error al obtener los datos');
         const data = await response.json();
-        console.log(data);
         setRepairs(data);
       } catch (err) {
         // @ts-ignore

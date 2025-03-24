@@ -92,11 +92,30 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem
 
   const handleSave = () => {
     setShowPopup(true);
-    console.log(formData);
+  };
+
+  const handleUpdateReparaciones = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/reparaciones/${formData.id}/`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al actualizar la reparacion');
+      }
+      const updatedReparacion = await response.json();
+      setFormData(updatedReparacion);
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   const confirmSave = () => {
-    // Aca tiene que estar la request al back de edit
+    handleUpdateReparaciones()
     setShowPopup(false);
     setEditMode(false);
   };
@@ -138,17 +157,17 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem
         </div>
         {/* Fifth Row */}
         <div className="mt-4">
-          <Field label="Falla" value={formData.failure} height="h-20" itemcenter scrollable isEditing={editMode} name="falla" onChange={handleChange} />
+          <Field label="Falla" value={formData.failure} height="h-20" itemcenter scrollable isEditing={editMode} name="failure" onChange={handleChange} />
         </div>
         {/* Sixth Row */}
         <div className="mt-4">
-          <Field label="Reparacion" value={formData.repair} height="h-20" itemcenter scrollable isEditing={editMode} name="reparacion" onChange={handleChange} />
+          <Field label="Reparacion" value={formData.repair} height="h-20" itemcenter scrollable isEditing={editMode} name="repair" onChange={handleChange} />
         </div>
         {/* Seventh Row */}
         <div className="flex justify-start gap-5 mt-6">
-          <Field label="Costo de repuesto" name="costoRepuesto" onChange={handleChange} value={`$ ${formData.spare_cost.toString()}`} isEditing={editMode} />
-          <Field label="Mano de obra" name="manoObra" onChange={handleChange} value={`$ ${formData.labor_cost.toString()}`} isEditing={editMode} />
-          <Field label="Debe" name="debe" onChange={handleChange} value={`$ ${formData.pending_payment.toString()}`} isEditing={editMode} />
+          <Field label="Costo de repuesto" name="spare_cost" onChange={handleChange} value={`$ ${formData.spare_cost.toString()}`} isEditing={editMode} />
+          <Field label="Mano de obra" name="labor_cost" onChange={handleChange} value={`$ ${formData.labor_cost.toString()}`} isEditing={editMode} />
+          <Field label="Debe" name="pending_payment" onChange={handleChange} value={`$ ${formData.pending_payment.toString()}`} isEditing={editMode} />
         </div>
         {/* Edit Mode buttons */}
         {editMode && (

@@ -6,7 +6,8 @@ from rest_framework.generics import GenericAPIView
 from .serializers import *
 from .models import *
 
-# Tengo que devolver la lista de reparaciones con  los datos correspondientes, no los ids de cada cosa.
+# Agregar las request por token para que solo los usuarios autenticados puedan acceder a los datos
+# Agregar Login y Logout
 
 class ReparacionesListView(GenericAPIView):
     permissions_classes = [AllowAny]
@@ -53,3 +54,16 @@ class ClienteListView(GenericAPIView):
         serializer = ClienteSerializer(clientes, many=True)
         
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def put (self, request, pk):
+        try:
+            cliente = Cliente.objects.get(pk=pk)
+        except Cliente.DoesNotExist:
+            return Response({"error": "Cliente no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = ClienteSerializer(cliente, data=request.data, partial=True)
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
