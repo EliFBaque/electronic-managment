@@ -59,7 +59,7 @@ const Paginator: React.FC<PaginatorProps> = ({
         {getPageNumbers().map((page, index) => (
           <button
             key={index}
-            className={`px-3 py-1 border border-[#3a4459] rounded transition-colors ${
+            className={`px-3 py-1 border border-[#3a4459] hover:bg-[#2a3447] rounded transition-colors ${
               currentPage === page ? 'bg-[#2a3447]' : ''
             }`}
             onClick={() => typeof page === 'number' && onPageChange(page)}

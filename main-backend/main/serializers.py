@@ -55,14 +55,15 @@ class ReparacionesSerializer(serializers.ModelSerializer):
     modelo = serializers.CharField(source='modelo.name', read_only=True)
     tipo = serializers.CharField(source='tipo.name', read_only=True)
     confirmation = serializers.CharField(source='confirmation.confirmation', read_only=True)
-    # Entry Date and Delivery Date, need to finish front to update this (1)
+    
+#   Entry Date and Delivery Date, need to finish front to update this (1)
 #   entry_date = serializers.SerializerMethodField()
 #   delivery_date = serializers.SerializerMethodField()
     
     class Meta:
         model = Reparaciones
         fields = '__all__'
-    # (1)    
+    # (1)    This make the query slower
     # def get_entry_date(self, obj):
     #     return obj.entry_date.strftime('%d/%m/%Y') if obj.entry_date else None
 

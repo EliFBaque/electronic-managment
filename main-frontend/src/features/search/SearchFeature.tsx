@@ -72,7 +72,7 @@ export default function SearchFeature() {
       }
   
       // Filtro por texto para los demás campos
-      return (repair[key as keyof typeof repair] as unknown as string)?.toLowerCase().includes(value.toLowerCase());
+      return String(repair[key as keyof typeof repair])?.toLowerCase().includes(value.toLowerCase());
     });
   });
 

@@ -14,7 +14,7 @@ const filterFields = [
   { name: 'tipo', label: 'Tipo' },
   { name: 'marca', label: 'Marca' },
   { name: 'modelo', label: 'Modelo' },
-  { name: 'numeroSerie', label: 'N° de Serie' },
+  { name: 'serial_num', label: 'N° de Serie' },
   { name: 'entry_date_min', label: 'Fecha Entrada' },
   { name: '', label: '' }, // Espacio vacío sin estilos
   { name: 'delivery_date_max', label: 'Fecha Salida' }

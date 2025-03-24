@@ -10,13 +10,29 @@ from .models import *
 
 class ReparacionesListView(GenericAPIView):
     permissions_classes = [AllowAny]
-    
+
+    # Agregar permisos, sino cualquiera puede cambiar los datos    
     def get(self, request):
         reparaciones = Reparaciones.objects.all().order_by('-id')[:15]
         
         serializer = ReparacionesSerializer(reparaciones, many=True)
         
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    # Funcion para actualizar datos de una reparacion.
+    def put(self, request, pk):
+        try:
+            reparacion = Reparaciones.objects.get(pk=pk)
+        except Reparaciones.DoesNotExist:
+            return Response({"error": "Reparación no encontrada"}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = ReparacionesSerializer(reparacion, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
     
     
 class ClienteListView(GenericAPIView):
@@ -29,7 +45,7 @@ class ClienteListView(GenericAPIView):
         if not name:
             return Response({'Error': 'El parámetro "nombre" es requerido'}, status=status.HTTP_400_BAD_REQUEST)
         
-        clientes = Cliente.objects.filter(name__icontains=name)  # Cambia 'name' si el campo en el modelo es diferente
+        clientes = Cliente.objects.filter(name__icontains=name)
         
         if not clientes.exists():
             return Response({'Error': 'Cliente no encontrado'}, status=status.HTTP_404_NOT_FOUND)
