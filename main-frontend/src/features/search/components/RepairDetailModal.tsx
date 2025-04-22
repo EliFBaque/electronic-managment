@@ -5,6 +5,7 @@ import { MdOutlineEdit } from 'react-icons/md';
 import ClientDetail from './ClientDetail';
 import Field from './Field';
 
+const API_URL = "http://localhost:8000/api/reparaciones/";
 // Interfaces
 
 interface DetailModalProps {
@@ -73,6 +74,12 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem
 
   const [prevData, setPrevData] = useState(formData);
 
+  const formatDate = (dateString: string) => {
+    if (!dateString) return "-";
+    const [day, month, year] = dateString.split("/");
+    return `${year}-${month}-${day}`;
+  };
+
   const handleEdit = () => {
     setPrevData(formData);
     setEditMode(true);
@@ -91,12 +98,19 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem
   };
 
   const handleSave = () => {
+    const formattedFormData = {
+      ...formData,
+      entry_date: formatDate(formData.entry_date), 
+      delivery_date: formatDate(formData.delivery_date),
+      budget_date: formatDate(formData.budget_date),
+    };
+    setFormData(formattedFormData);
     setShowPopup(true);
   };
 
   const handleUpdateReparaciones = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/reparaciones/${formData.id}/`, {
+      const response = await fetch(`${API_URL}${formData.id}/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -135,7 +149,7 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem
         </div>
         {/* First Row */}
         <div className="grid grid-cols-3 gap-4">
-          <Field label="N°" value={formData.id} name="id" onChange={handleChange} isEditing={false}/>
+          <Field label="N°" value={formData.id} name="id" onChange={handleChange} isEditing={false} />
           <div className="col-span-2">
             <Field label="Tipo" name='tipo' onChange={handleChange} value={formData.tipo} isEditing={editMode} />
           </div>

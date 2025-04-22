@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 // @ts-ignore
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 
@@ -8,8 +7,9 @@ import { IoStatsChart } from "react-icons/io5";
 import { FaPowerOff } from "react-icons/fa6";
 
 import SearchFeature from '../search/SearchFeature';
-import Login from './testinglogin';
 import { AuthProvider } from '../../context/AuthContext';
+
+import ModelsCD from '../cruds/ModelsCD';
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -29,7 +29,7 @@ const Sidebar: React.FC = () => {
           <SidebarItem icon={<IoStatsChart />} text="Estadísticas" isOpen={isOpen} setSelected={() => navigate("/estadística")} />
         </div>
         {/* Still need a login for update this button */}
-        <SidebarItem icon={<FaPowerOff />} text="Salir" isOpen={isOpen} setSelected={() => console.log("Apagar")} />
+        <SidebarItem icon={<FaPowerOff />} text="Salir" className="" isOpen={isOpen} setSelected={() => console.log("Apagar")} />
       </div>
 
       {/* Main Content */}
@@ -37,7 +37,7 @@ const Sidebar: React.FC = () => {
         <AuthProvider>
         <Routes>
           <Route path="/buscar" element={<SearchFeature />} />
-          <Route path="/añadir" element={<Login />} />
+          <Route path="/añadir" element={<ModelsCD />}/>
           <Route path="/estadística" />
         </Routes>
         </AuthProvider>

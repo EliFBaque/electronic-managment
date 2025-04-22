@@ -28,15 +28,29 @@ export default function SearchFeature() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 15;
 
+  const formatDate = (dateString: string) => {
+    if (!dateString) return "-";
+    const [year, month, day] = dateString.split("-");
+    return `${day}/${month}/${year}`;
+  };
+  
   // Fetch de reparaciones
   useEffect(() => {
     const fetchRepairs = async () => {
       try {
         setLoading(true);
         const response = await fetch(API_URL);
-        if (!response.ok) throw new Error('Error al obtener los datos');
+        if (!response.ok) throw new Error("Error al obtener los datos");
         const data = await response.json();
-        setRepairs(data);
+  
+        const formattedData = data.map((repair: any) => ({
+          ...repair,
+          entry_date: repair.entry_date ? formatDate(repair.entry_date) : "-",
+          budget_date: repair.budget_date ? formatDate(repair.budget_date) : "-",
+          delivery_date: repair.delivery_date ? formatDate(repair.delivery_date) : "-",
+        }));
+  
+        setRepairs(formattedData);
       } catch (err) {
         // @ts-ignore
         setError(err.message);
@@ -44,7 +58,7 @@ export default function SearchFeature() {
         setLoading(false);
       }
     };
-
+  
     fetchRepairs();
   }, []);
 
@@ -107,7 +121,7 @@ export default function SearchFeature() {
   const handleResetDate = (field: string) => {
     setFilters({ ...filters, [field]: '' });
   };
-  // Add more styling to the loading and error, add animation for loading, and center the two messages
+
   if (loading) return <p className="text-white">Cargando datos...</p>;
   if (error) return <p className="text-red-500">Error: {error}</p>;
 

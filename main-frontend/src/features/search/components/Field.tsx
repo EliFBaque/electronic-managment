@@ -26,8 +26,7 @@ const Field: React.FC<FieldProps> = ({
     name,
 }) => {
     const dateFieldRef = useRef<HTMLInputElement>(null);
-
-    // Verifica si el campo debe ser de tipo "date"
+    
     const isDateField = ["entry_date", "delivery_date", "budget_date"].includes(name || "");
 
     return (
@@ -43,17 +42,18 @@ const Field: React.FC<FieldProps> = ({
                             onChange={onChange}
                             ref={dateFieldRef}
                             className={`
-                                bg-[#2a3447] 
+                                bg-[#363b46] 
                                 border 
-                                border-[#3a4459] 
+                                border-[#94979c] 
                                 w-full 
                                 h-8 
                                 rounded 
-                                text-sm 
+                                text-sm
+                                items-center
                                 mt-1 
                                 px-2  
                                 ${paddingY} 
-                                pr-10`}
+                            `}
                         />
                     </div>
                 ) : (
@@ -63,9 +63,9 @@ const Field: React.FC<FieldProps> = ({
                         onChange={onChange}
                         maxLength={200}
                         className={`
-                            bg-[#2a3447] 
+                            bg-[#363b46] 
+                            border-[#94979c] 
                             border 
-                            border-[#3a4459] 
                             w-full 
                             rounded 
                             text-sm 
@@ -74,7 +74,7 @@ const Field: React.FC<FieldProps> = ({
                             resize-none 
                             ${height} 
                             ${paddingY} 
-                            ${scrollable ? "overflow-y-auto max-h-20" : ""}`}
+                            ${scrollable ? "overflow-x-auto max-h-20" : ""}`}
                     />
                 )
             ) : (

@@ -1,0 +1,8 @@
+- Limpiar varios console logs
+- Verificar estilos en la pestania de clientes para cerrarlo y editarlo correctamente.
+- Verificar el filtrado por fecha.
+- Filters.tsx modificar el estilo para no tener el espacio en blanco sino usando cols.
+- Los campos fechas tengo que modificarlos en la base de datos para mostrarlos y no tener que formatearlos constantemente.
+- Ver de agregar Cache.
+- Agregar más estilo a la carga y al error, agregar animación para la carga y centre los dos mensajes.
+- Login page todavia sin hacer, el archivo funcional esta, el estilo no, ni el formato. :D

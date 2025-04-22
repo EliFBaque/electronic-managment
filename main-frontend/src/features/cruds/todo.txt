@@ -1,0 +1,4 @@
+- En todos los CD, ver la manera de actualizar la tabla luego de agregar un nuevo objecto. (En SearchFeature tengo eso)
+- Agregar algo de animaciones para un visual mejor.
+- El eliminar actualmente no funciona correctamente, ya que el problema viene de la base de datos y sus relaciones.
+- Algunos pequenios errores en el estilo, verificar despues.

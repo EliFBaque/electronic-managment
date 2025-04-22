@@ -5,6 +5,7 @@ import { IoMdClose } from 'react-icons/io';
 import { MdOutlineEdit } from 'react-icons/md';
 import { IoMdCheckmark } from "react-icons/io";
 
+const API_URL = 'http://localhost:8000/api/cliente/'
 interface Cliente {
   id: string;
   name: string;
@@ -43,7 +44,7 @@ const ClientDetail: React.FC<ClienteInfoProps> = ({ clienteNombre }) => {
 
   const fetchCliente = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/cliente/?name=${clienteNombre}`);
+      const response = await fetch(`${API_URL}?name=${clienteNombre}`);
       const data: Cliente[] = await response.json();
 
       if (!response.ok) {
@@ -75,7 +76,7 @@ const ClientDetail: React.FC<ClienteInfoProps> = ({ clienteNombre }) => {
 
   const handleUpdateCliente = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/cliente/${formData.id}/`, {
+      const response = await fetch(`${API_URL}${formData.id}/`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
