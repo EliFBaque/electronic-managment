@@ -82,7 +82,7 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem
 
   const handleEdit = () => {
     setPrevData(formData);
-    setEditMode(true);
+    setEditMode(!editMode);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -140,59 +140,59 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem
       <div className="relative bg-[#1a1f2e] shadow-lg rounded-xl p-6 w-[600px] h-180 flex flex-col m-3 justify-between">
         {/* Edit and Close buttons */}
         <div className="flex justify-between w-full bg-gray-200 rounded-lg">
-          <button className="absolute top-2 right-2 text-white" onClick={() => setSelectedItem(null)}>
+          <button className="absolute top-2 right-2 text-white cursor-pointer" onClick={() => setSelectedItem(null)}>
             <IoMdClose size={20} />
           </button>
-          <button className="absolute top-2 left-2 text-white" onClick={handleEdit}>
+          <button className="absolute top-2 left-2 text-white cursor-pointer" onClick={handleEdit}>
             {editMode ? <IoMdCheckmark size={20} /> : <MdOutlineEdit size={20} />}
           </button>
         </div>
         {/* First Row */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-4 cursor-default">
           <Field label="N°" value={formData.id} name="id" onChange={handleChange} isEditing={false} />
           <div className="col-span-2">
             <Field label="Tipo" name='tipo' onChange={handleChange} value={formData.tipo} isEditing={editMode} />
           </div>
         </div>
         {/* Second Row */}
-        <div className="grid grid-cols-2 gap-4 mt-4">
+        <div className="grid grid-cols-2 gap-4 mt-4 cursor-default">
           <Field label="Marca" name='marca' onChange={handleChange} value={formData.marca} isEditing={editMode} />
           <Field label="Fecha de Entrada" name='entry_date' onChange={handleChange} value={formData.entry_date} isEditing={editMode} />
         </div>
         {/* Third Row */}
-        <div className="grid grid-cols-2 gap-4 mt-4">
+        <div className="grid grid-cols-2 gap-4 mt-4 cursor-default">
           <Field label="Modelo" name='modelo' onChange={handleChange} value={formData.modelo} isEditing={editMode} />
           <Field label="Fecha de Presupuesto" name='budget_date' onChange={handleChange} value={formData.budget_date} isEditing={editMode} />
         </div>
         {/* Fourth Row */}
-        <div className="grid grid-cols-2 gap-4 mt-4">
+        <div className="grid grid-cols-2 gap-4 mt-4 cursor-default">
           <Field label="N° Serie" name='serial_num' onChange={handleChange} value={formData.serial_num} isEditing={editMode} />
           <Field label="Fecha de Salida" name='delivery_date' onChange={handleChange} value={formData.delivery_date} isEditing={editMode} />
         </div>
         {/* Fifth Row */}
-        <div className="mt-4">
+        <div className="mt-4 cursor-default">
           <Field label="Falla" value={formData.failure} height="h-20" itemcenter scrollable isEditing={editMode} name="failure" onChange={handleChange} />
         </div>
         {/* Sixth Row */}
-        <div className="mt-4">
+        <div className="mt-4 cursor-default">
           <Field label="Reparacion" value={formData.repair} height="h-20" itemcenter scrollable isEditing={editMode} name="repair" onChange={handleChange} />
         </div>
         {/* Seventh Row */}
-        <div className="flex justify-start gap-5 mt-6">
-          <Field label="Costo de repuesto" name="spare_cost" onChange={handleChange} value={`$ ${formData.spare_cost.toString()}`} isEditing={editMode} />
-          <Field label="Mano de obra" name="labor_cost" onChange={handleChange} value={`$ ${formData.labor_cost.toString()}`} isEditing={editMode} />
-          <Field label="Debe" name="pending_payment" onChange={handleChange} value={`$ ${formData.pending_payment.toString()}`} isEditing={editMode} />
+        <div className="flex justify-start gap-5 mt-6 cursor-default">
+          <Field label="Costo de repuesto" name="spare_cost" onChange={handleChange} value={formData.spare_cost.toString()} isEditing={editMode} />
+          <Field label="Mano de obra" name="labor_cost" onChange={handleChange} value={formData.labor_cost.toString()} isEditing={editMode} />
+          <Field label="Debe" name="pending_payment" onChange={handleChange} value={formData.pending_payment.toString()} isEditing={editMode} />
         </div>
         {/* Edit Mode buttons */}
         {editMode && (
           <div className="fixed top-0 left-0 w-full h-[100px] flex items-center justify-center bg-[#1a1f2e] shadow-lg">
             <div className="p-4 rounded text-center">
-              <p>¿Quiere guardar los cambios en reparacion?</p>
+              <p>¿Quiere guardar los cambios en Reparacion?</p>
               <div className="mt-2 flex justify-center gap-4">
-                <button onClick={handleSave} className="bg-[#131722] text-white px-4 text-sm font-semibold py-2 rounded">
+                <button onClick={handleSave} className="bg-[#131722] text-white cursor-pointer px-4 text-sm font-semibold py-2 rounded">
                   Guardar
                 </button>
-                <button onClick={handleCancel} className="bg-[#23293a] text-white px-4 text-sm font-semibold py-2 rounded">
+                <button onClick={handleCancel} className="bg-[#23293a] text-white cursor-pointer px-4 text-sm font-semibold py-2 rounded">
                   Cancelar
                 </button>
               </div>
@@ -203,12 +203,12 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem
         {showPopup && (
           <div className="fixed top-0 left-0 w-full h-[100px] flex items-center justify-center bg-[#1a1f2e] shadow-lg">
             <div className="p-4 rounded text-center">
-              <p>¿Seguro que quiere guardar los cambios en reparacion?</p>
+              <p>¿Seguro que quiere guardar los cambios en Reparacion?</p>
               <div className="mt-2 flex justify-center gap-4">
-                <button onClick={confirmSave} className="bg-[#131722] text-white px-4 text-sm font-semibold py-2 rounded">
+                <button onClick={confirmSave} className="bg-[#131722] text-white cursor-pointer px-4 text-sm font-semibold py-2 rounded">
                   Confirmar
                 </button>
-                <button onClick={() => setShowPopup(false)} className="bg-[#23293a] text-white px-4 text-sm font-semibold py-2 rounded">
+                <button onClick={() => setShowPopup(false)} className="bg-[#23293a] text-white cursor-pointer px-4 text-sm font-semibold py-2 rounded">
                   Cancelar
                 </button>
               </div>

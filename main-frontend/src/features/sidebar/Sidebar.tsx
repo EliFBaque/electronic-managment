@@ -56,16 +56,17 @@ interface SidebarItemProps {
 
 const SidebarItem: React.FC<SidebarItemProps> = ({ icon, text, isOpen, setSelected, className }) => (
   <li
-    className={`flex items-center gap-4 w-full p-3 rounded-md cursor-pointer transition-all duration-300 ${className}`}
-    onClick={() => setSelected(text)}
+    className={`flex items-center gap-4 w-full p-3 rounded-md  transition-all duration-300 ${className}`}
+    
   >
     <span
-      className={`text-xl flex-shrink-0 transition-all duration-300 p-2  hover:bg-gray-600 hover:rounded-full `}
+      className={`text-xl flex-shrink-0 transition-all duration-300 p-2 cursor-pointer hover:bg-gray-600 hover:rounded-full `} 
+      onClick={() => setSelected(text)}
     >
       {icon}
     </span>
     <p
-      className={`text-base transition-opacity duration-300 
+      className={`text-base transition-opacity duration-300 cursor-default
         ${isOpen ? "opacity-100" : "opacity-0"} hover:text-white  hover:rounded-md p-1.5 w-full`
       }
     >

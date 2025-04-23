@@ -25,6 +25,7 @@ const ClientDetail: React.FC<ClienteInfoProps> = ({ clienteNombre }) => {
   const [clienteData, setClienteData] = useState<Cliente | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const [formData, setFormData] = useState<Cliente>({
     id: "",
     name: "",
@@ -60,18 +61,29 @@ const ClientDetail: React.FC<ClienteInfoProps> = ({ clienteNombre }) => {
     }
   };
 
+  const [prevData, setPrevData] = useState(formData);
+
   const handleEditToggle = () => {
+    setPrevData(formData);
     if (!editMode) {
       setFormData(clienteData!);
     }
     setEditMode(!editMode);
   };
 
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleCancel = () => {
+    if (prevData) {
+      setFormData(prevData);
+    }
+    setEditMode(false);
   };
 
   const handleUpdateCliente = async () => {
@@ -96,14 +108,19 @@ const ClientDetail: React.FC<ClienteInfoProps> = ({ clienteNombre }) => {
   };
   
   const handleSave = () => {
+    setShowPopup(true);
+  };
+
+  const confirmSave = () => {
     handleUpdateCliente();
+    setShowPopup(false);
     setEditMode(false);
   };
 
   return (
     <div className="flex items-center justify-center h-screen">
       <button onClick={() => setIsVisible(!isVisible)}>
-        <div className="flex flex-col items-center font-bold">
+        <div className="flex flex-col items-center cursor-pointer font-bold">
           {isVisible ? <IoIosArrowDropleft size={20} /> : <IoIosArrowDropright size={20} />}
         </div>
       </button>
@@ -113,52 +130,77 @@ const ClientDetail: React.FC<ClienteInfoProps> = ({ clienteNombre }) => {
           {clienteData ? (
             <div className='h-full mt-2'>
               <div className="flex justify-between w-full bg-gray-200 rounded-lg">
-                <button className="absolute top-2 right-2 text-white" onClick={() => setIsVisible(false)}>
+                <button className="absolute top-2 right-2 cursor-pointer text-white" onClick={() => setIsVisible(false)}>
                   <IoMdClose size={20} />
                 </button>
 
-                <button className="absolute top-2 left-2 text-white" onClick={handleEditToggle}>
+                <button className="absolute top-2 left-2 cursor-pointer text-white" onClick={handleEditToggle}>
                   {editMode ? <IoMdCheckmark size={20} /> : <MdOutlineEdit size={20} />}
                 </button>
               </div>
 
               {/* Campos con edición */}
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-4 cursor-default">
                 <Field label="N°" value={formData.id} name="id" isEditing={false} />
                 <div className="col-span-2">
                   <Field label="Cliente" name="name" value={formData.name} onChange={handleChange} isEditing={editMode} />
                 </div>
               </div>
 
-              <div className="mt-4">
+              <div className="mt-4 cursor-default">
                 <Field label="Email" value={formData.email} name="email" onChange={handleChange} isEditing={editMode} />
               </div>
 
-              <div className="mt-4">
+              <div className="mt-4 cursor-default">
                 <Field label="Dirección" value={formData.address} name="address" onChange={handleChange} isEditing={editMode} />
               </div>
 
-              <div className="flex justify-start gap-5 mt-6">
+              <div className="flex justify-start gap-5 mt-6 cursor-default">
                 <Field label="Celular" value={formData.cellphone.toString()} name="cellphone" onChange={handleChange} isEditing={editMode} />
                 <Field label="Tel. Personal" value={formData.personal_phone.toString()} name="personal_phone" onChange={handleChange} isEditing={editMode} />
                 <Field label="Tel. Trabajo" value={formData.work_phone.toString()} name="work_phone" onChange={handleChange} isEditing={editMode} />
               </div>
 
-              <div className="mt-4">
+              <div className="mt-4 cursor-default">
                 <Field label="Contacto" value={formData.contact} name="contact" onChange={handleChange} isEditing={editMode} />
               </div>
-              {/* needs styling */}
-              <button onClick={handleSave}>
-                <IoMdClose size={20} />
-              </button>
-            
-
             </div>
           ) : (
             <p className="text-white">Cargando o sin resultados...</p>
             
           )}
+          {editMode && (
+            <div className="fixed top-0 left-0 w-full h-[100px] flex items-center justify-center bg-[#1a1f2e] shadow-lg">
+              <div className="p-4 rounded text-center">
+                <p>¿Quiere guardar los cambios en el Cliente?</p>
+                <div className="mt-2 flex justify-center gap-4">
+                  <button onClick={handleSave} className="bg-[#131722] text-white cursor-pointer px-4 text-sm font-semibold py-2 rounded">
+                    Guardar
+                  </button>
+                  <button onClick={handleCancel} className="bg-[#23293a] text-white cursor-pointer px-4 text-sm font-semibold py-2 rounded">
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}  
+          {showPopup && (
+            <div className="fixed top-0 left-0 w-full h-[100px] flex items-center justify-center bg-[#1a1f2e] shadow-lg">
+              <div className="p-4 rounded text-center">
+                <p>¿Seguro que quiere guardar los cambios en el Cliente?</p>
+                <div className="mt-2 flex justify-center gap-4">
+                  <button onClick={confirmSave} className="bg-[#131722] text-white cursor-pointer px-4 text-sm font-semibold py-2 rounded">
+                    Confirmar
+                  </button>
+                  <button onClick={() => setShowPopup(false)} className="bg-[#23293a] text-white cursor-pointer px-4 text-sm font-semibold py-2 rounded">
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}         
         </div>
+        
       )}
     </div>
   );

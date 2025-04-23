@@ -43,13 +43,13 @@ const Paginator: React.FC<PaginatorProps> = ({
   };
 
   return (
-    <div className="mt-2 flex justify-between items-center text-sm text-white">
+    <div className="mt-2 flex justify-between items-center text-sm text-white cursor-default">
       <div>
         Mostrando {totalItems === 0 ? "0 a 0" : `${(currentPage - 1) * itemsPerPage + 1} a ${Math.min(currentPage * itemsPerPage, totalItems)}`} de {totalItems} reparaciones
       </div>
       <div className="flex gap-2">
         <button
-          className="px-3 py-1 border border-[#3a4459] rounded hover:bg-[#2a3447] transition-colors"
+          className="px-3 py-1 border border-[#3a4459] cursor-pointer rounded hover:bg-[#2a3447] transition-colors"
           onClick={onPrev}
           disabled={currentPage === 1}
         >
@@ -59,7 +59,7 @@ const Paginator: React.FC<PaginatorProps> = ({
         {getPageNumbers().map((page, index) => (
           <button
             key={index}
-            className={`px-3 py-1 border border-[#3a4459] hover:bg-[#2a3447] rounded transition-colors ${
+            className={`px-3 py-1 border border-[#3a4459] cursor-pointer hover:bg-[#2a3447] rounded transition-colors ${
               currentPage === page ? 'bg-[#2a3447]' : ''
             }`}
             onClick={() => typeof page === 'number' && onPageChange(page)}
@@ -70,7 +70,7 @@ const Paginator: React.FC<PaginatorProps> = ({
         ))}
 
         <button
-          className="px-3 py-1 border border-[#3a4459] rounded hover:bg-[#2a3447] transition-colors"
+          className="px-3 py-1 border border-[#3a4459] cursor-pointer rounded hover:bg-[#2a3447] transition-colors"
           onClick={onNext}
           disabled={currentPage === totalPages}
         >
