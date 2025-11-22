@@ -5,8 +5,11 @@ import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-route
 import { FaAlignJustify, FaPlus, FaSearch } from 'react-icons/fa';
 import { IoStatsChart } from "react-icons/io5";
 import { FaPowerOff } from "react-icons/fa6";
+import { FaRegFilePdf } from "react-icons/fa6";
 
 import SearchFeature from '../search/SearchFeature';
+import { Dashboard } from '../stadistics/DashboardFeature';
+import ManualSearchPage from '../manualfinder/ManualesPage'
 import { AuthProvider } from '../../context/AuthContext';
 
 import ModelsCD from '../cruds/ModelsCD';
@@ -27,6 +30,7 @@ const Sidebar: React.FC = () => {
           <SidebarItem icon={<FaSearch />} text="Buscar" isOpen={isOpen} setSelected={() => navigate("/buscar")} />
           <SidebarItem icon={<FaPlus />} text="Añadir" isOpen={isOpen} setSelected={() => navigate("/añadir")} />
           <SidebarItem icon={<IoStatsChart />} text="Estadísticas" isOpen={isOpen} setSelected={() => navigate("/estadística")} />
+          <SidebarItem icon={<FaRegFilePdf />} text="Manuales" isOpen={isOpen} setSelected={() => navigate("/manualfinder")} />
         </div>
         {/* Still need a login for update this button */}
         <SidebarItem icon={<FaPowerOff />} text="Salir" className="" isOpen={isOpen} setSelected={() => console.log("Apagar")} />
@@ -38,7 +42,9 @@ const Sidebar: React.FC = () => {
         <Routes>
           <Route path="/buscar" element={<SearchFeature />} />
           <Route path="/añadir" element={<ModelsCD />}/>
-          <Route path="/estadística" />
+          <Route path="/estadística" element={<Dashboard/>}/>
+          <Route path="/manualfinder" element={<ManualSearchPage
+          />}/>
         </Routes>
         </AuthProvider>
       </div>
