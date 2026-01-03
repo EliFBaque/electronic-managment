@@ -3,7 +3,7 @@ import ClienteForm from "./components/ClienteForm";
 import ClientePag from "./components/ClientePag";
 import ClienteTable from "./components/ClienteTable";
 
-const API_URL = 'http://localhost:8000/api/cliente/';
+const API_URL = 'http://localhost:8000/api/clients/';
 
 export default function ClienteCD() {
     const [data, setData] = useState([]);

@@ -47,26 +47,26 @@ export default function RepairTable({
                 {item.modelo}
               </td>
               <td className="px-4 py-2 border border-gray-700 text-center cursor-default">
-                {item.serial_num}
+                {item.num_serie}
               </td>
               <td className="px-4 py-2 border border-gray-700 cursor-default">
                 <div className="flex flex-col gap-1">
-                  <span>Ingreso: {item.entry_date}</span>
-                  <span>Presupuesto: {item.budget_date}</span>
-                  <span>Entrega: {item.delivery_date}</span>
+                  <span>Ingreso: {item.fch_entrada}</span>
+                  <span>Presupuesto: {item.fch_presu}</span>
+                  <span>Entrega: {item.fch_salida}</span>
                 </div>
               </td>
               <td className="px-4 py-2 border border-gray-700 cursor-default">
                 <div className="flex flex-col gap-1">
-                  <span>Repuestos: ${item.spare_cost}</span>
-                  <span>Mano Obra: ${item.labor_cost}</span>
-                  <span>Pendiente: ${item.pending_payment}</span>
+                  <span>Repuestos: ${item.costo_repuesto}</span>
+                  <span>Mano Obra: ${item.costo_mano_obra}</span>
+                  <span>Pendiente: ${item.pendiente_pago}</span>
                 </div>
               </td>
               <td className="px-4 py-2 border border-gray-700 text-center cursor-default">
-                {item.confirmation === "Aceptado" && "✅"}
-                {item.confirmation === "Pendiente" && "⏳"}
-                {item.confirmation === "Rechazado" && "❌"}
+                {item.aceptado === "SI" && "✅"}
+                {item.aceptado === "PENDIENTE" && "⏳"}
+                {item.aceptado === "NO" && "❌"}
               </td>
               <td className="px-4 py-2 border border-gray-700 text-center">
                 <button

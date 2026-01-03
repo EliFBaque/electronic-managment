@@ -3,7 +3,7 @@ import TipoForm from "./components/TipoForm";
 import TipoTable from "./components/TipoTable";
 import TipoPag from "./components/TipoPag";
 
-const API_URL = 'http://localhost:8000/api/tipo/';
+const API_URL = 'http://localhost:8000/api/types/';
 
 export default function MarcaCD() {
     const [data, setData] = useState([]);

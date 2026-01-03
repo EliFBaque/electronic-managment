@@ -3,27 +3,27 @@ import RepairForm from './components/RepairForm';
 import RepairTable from './components/RepairTable';
 import RepairPag from './components/RepairPag';
 
-const API_URL = 'http://localhost:8000/api/reparaciones/';
+const API_URL = 'http://localhost:8000/api/repairs/';
 
 export default function RepairsCD(){
 
     {/* Form Variables */}
     const [data, setData] = useState([]);
     const [form, setForm] = useState({
-        cliente_id: 0,
-        tipo_id: 0,
-        marca_id: 0,
-        modelo_id: 0,
-        serial_num: "",
-        entry_date: "",
-        budget_date: "",
-        delivery_date: "",
-        spare_cost: 0,
-        labor_cost: 0,
-        pending_payment: 0,
-        repair: "",
-        failure: "",
-        confirmation_id: 0, 
+        cliente: 0,
+        tipo: 0,
+        marca: 0,
+        modelo: 0,
+        num_serie: "",
+        fch_entrada: "",
+        fch_presu: "",
+        fch_salida: "",
+        costo_repuesto: 0,
+        costo_mano_obra: 0,
+        pendiente_pago: 0,
+        reparacion: "",
+        falla: "",
+        aceptado: 0, 
     });
 
     {/* Table Variables */}
@@ -40,13 +40,13 @@ export default function RepairsCD(){
                 if (!response.ok) throw new Error("Error al obtener los datos");
                 const data = await response.json();
 
-                const formattedData = data.map((repair: any) => ({
-                    ...repair,
-                    entry_date: repair.entry_date ? formatDate(repair.entry_date) : "-",
-                    budget_date: repair.budget_date ? formatDate(repair.budget_date) : "-",
-                    delivery_date: repair.delivery_date ? formatDate(repair.delivery_date) : "-",
+                const formattedData = data.map((repairs: any) => ({
+                    ...repairs,
+                    fch_entrada: repairs.fch_entrada ? formatDate(repairs.fch_entrada) : "-",
+                    fch_presu: repairs.fch_presu ? formatDate(repairs.fch_presu) : "-",
+                    fch_salida: repairs.fch_salida ? formatDate(repairs.fch_salida) : "-",
                 }));
-
+                console.log(formattedData);
                 setData(formattedData);
             } catch (err) {
                 // @ts-ignore
@@ -121,22 +121,22 @@ export default function RepairsCD(){
         e.preventDefault();
         submitRepair();
         setForm({
-                cliente_id: 0,
-                tipo_id: 0,
-                marca_id: 0,
-                modelo_id: 0,
-                serial_num: "",
-                entry_date: "",
-                budget_date: "",
-                delivery_date: "",
-                spare_cost: 0,
-                labor_cost: 0,
-                pending_payment: 0,
-                repair: "",
-                failure: "",
-                confirmation_id: 0, 
+                cliente: 0,
+                tipo: 0,
+                marca: 0,
+                modelo: 0,
+                num_serie: "",
+                fch_entrada: "",
+                fch_presu: "",
+                fch_salida: "",
+                costo_repuesto: 0,
+                costo_mano_obra: 0,
+                pendiente_pago: 0,
+                reparacion: "",
+                falla: "",
+                aceptado: 0, 
         });
-        console.log(form);
+        
     };
 
     return (

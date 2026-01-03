@@ -5,16 +5,16 @@ import { IoMdClose } from 'react-icons/io';
 import { MdOutlineEdit } from 'react-icons/md';
 import { IoMdCheckmark } from "react-icons/io";
 
-const API_URL = 'http://localhost:8000/api/cliente/'
+const API_URL = 'http://localhost:8000/api/clients/'
 interface Cliente {
   id: string;
-  name: string;
+  nombre: string;
   email: string;
-  cellphone: string;
-  personal_phone: string;
-  work_phone: string;
-  address: string;
-  contact: string;
+  tel_celular: string;
+  tel_personal: string;
+  tel_trabajo: string;
+  direccion: string;
+  contacto: string;
 }
 
 interface ClienteInfoProps {
@@ -28,13 +28,13 @@ const ClientDetail: React.FC<ClienteInfoProps> = ({ clienteNombre }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [formData, setFormData] = useState<Cliente>({
     id: "",
-    name: "",
+    nombre: "",
     email: "",
-    cellphone: "",
-    personal_phone: "",
-    work_phone: "",
-    address: "",
-    contact: "",
+    tel_celular: "",
+    tel_personal: "",
+    tel_trabajo: "",
+    direccion: "",
+    contacto: "",
   });
 
   useEffect(() => {
@@ -143,7 +143,7 @@ const ClientDetail: React.FC<ClienteInfoProps> = ({ clienteNombre }) => {
               <div className="grid grid-cols-3 gap-4 cursor-default">
                 <Field label="N°" value={formData.id} name="id" isEditing={false} />
                 <div className="col-span-2">
-                  <Field label="Cliente" name="name" value={formData.name} onChange={handleChange} isEditing={editMode} />
+                  <Field label="Cliente" name="name" value={formData.nombre} onChange={handleChange} isEditing={editMode} />
                 </div>
               </div>
 
@@ -152,17 +152,17 @@ const ClientDetail: React.FC<ClienteInfoProps> = ({ clienteNombre }) => {
               </div>
 
               <div className="mt-4 cursor-default">
-                <Field label="Dirección" value={formData.address} name="address" onChange={handleChange} isEditing={editMode} />
+                <Field label="Dirección" value={formData.direccion} name="address" onChange={handleChange} isEditing={editMode} />
               </div>
 
               <div className="flex justify-start gap-5 mt-6 cursor-default">
-                <Field label="Celular" value={formData.cellphone.toString()} name="cellphone" onChange={handleChange} isEditing={editMode} />
-                <Field label="Tel. Personal" value={formData.personal_phone.toString()} name="personal_phone" onChange={handleChange} isEditing={editMode} />
-                <Field label="Tel. Trabajo" value={formData.work_phone.toString()} name="work_phone" onChange={handleChange} isEditing={editMode} />
+                <Field label="Celular" value={formData.tel_celular ?? ''} name="tel_celular" onChange={handleChange} isEditing={editMode} />
+                <Field label="Tel. Personal" value={formData.tel_personal ?? ''} name="tel_personal" onChange={handleChange} isEditing={editMode} />
+                <Field label="Tel. Trabajo" value={formData.tel_trabajo ?? ''} name="tel_trabajo" onChange={handleChange} isEditing={editMode} />
               </div>
 
               <div className="mt-4 cursor-default">
-                <Field label="Contacto" value={formData.contact} name="contact" onChange={handleChange} isEditing={editMode} />
+                <Field label="Contacto" value={formData.contacto} name="contact" onChange={handleChange} isEditing={editMode} />
               </div>
             </div>
           ) : (

@@ -3,7 +3,7 @@ import ModeloForm from "./components/ModeloForm";
 import ModeloTable from "./components/ModeloTable";
 import ModeloPag from "./components/ModeloPag";
 
-const API_URL = 'http://localhost:8000/api/modelo/';
+const API_URL = 'http://localhost:8000/api/models/';
 
 export default function ModeloCD() {
     const [data, setData] = useState([]);

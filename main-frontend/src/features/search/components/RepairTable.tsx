@@ -14,9 +14,9 @@ const columns = [
   { key: "tipo", label: "Tipo" },
   { key: "marca", label: "Marca" },
   { key: "modelo", label: "Modelo" },
-  { key: "serial_num", label: "N° de Serie" },
-  { key: "entry_date", label: "Entrada" },
-  { key: "delivery_date", label: "Salida" },
+  { key: "num_serie", label: "N° de Serie" },
+  { key: "fch_entrada", label: "Entrada" },
+  { key: "fch_salida", label: "Salida" },
 ];
 
 const RepairTable: React.FC<RepairTableProps> = ({ repairs, setSelectedItem }) => (

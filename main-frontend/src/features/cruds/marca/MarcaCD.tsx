@@ -3,7 +3,7 @@ import MarcaForm from "./components/MarcaForm";
 import MarcaTable from "./components/MarcaTable";
 import MarcaPag from "./components/MarcaPag";
 
-const API_URL = 'http://localhost:8000/api/marca/';
+const API_URL = 'http://localhost:8000/api/brands/';
 
 export default function MarcaCD() {
     const [data, setData] = useState([]);

@@ -7,7 +7,7 @@ import DetailModal from './components/RepairDetailModal';
 import Paginator from './components/Paginator';
 
 // API URL
-const API_URL = 'http://localhost:8000/api/reparaciones/';
+const API_URL = 'http://localhost:8000/api/repairs/';
 
 export default function SearchFeature() {
   const [repairs, setRepairs] = useState([]);
@@ -19,9 +19,9 @@ export default function SearchFeature() {
     tipo: '',
     marca: '',
     modelo: '',
-    serial_num: '',
-    entry_date: '',
-    delivery_date: ''
+    num_serie: '',
+    fch_entrada: '',
+    fch_salida: ''
   });
   
   const [selectedItem, setSelectedItem] = useState(null);
@@ -45,9 +45,9 @@ export default function SearchFeature() {
   
         const formattedData = data.map((repair: any) => ({
           ...repair,
-          entry_date: repair.entry_date ? formatDate(repair.entry_date) : "-",
-          budget_date: repair.budget_date ? formatDate(repair.budget_date) : "-",
-          delivery_date: repair.delivery_date ? formatDate(repair.delivery_date) : "-",
+          fch_entrada: repair.fch_entrada ? formatDate(repair.fch_entrada) : "-",
+          fch_presu: repair.fch_presu ? formatDate(repair.fch_presu) : "-",
+          fch_salida: repair.fch_salida ? formatDate(repair.fch_salida) : "-",
         }));
   
         setRepairs(formattedData);
@@ -71,14 +71,14 @@ export default function SearchFeature() {
 
         if (key === 'entry_date_min') {
           //@ts-ignore
-          const repairDate = new Date(repair.entry_date);
+          const repairDate = new Date(repair.fch_entrada);
           const filterDate = new Date(value);
           return repairDate >= filterDate;
         }
   
         if (key === 'delivery_date_max') {
           //@ts-ignore
-          const repairDate = new Date(repair.delivery_date);
+          const repairDate = new Date(repair.fch_salida);
           const filterDate = new Date(value);
           return repairDate <= filterDate; 
         }

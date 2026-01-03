@@ -18,16 +18,16 @@ interface FormData {
   cliente: string;
   tipo: string;
   marca: string;
-  entry_date: string;
+  fch_entrada: string;
   modelo: string;
-  budget_date: string;
-  serial_num: string;
-  delivery_date: string;
-  failure: string;
-  repair: string;
-  spare_cost: string;
-  labor_cost: string;
-  pending_payment: string;
+  fch_presu: string;
+  num_serie: string;
+  fch_salida: string;
+  falla: string;
+  reparacion: string;
+  costo_repuesto: string;
+  costo_mano_obra: string;
+  pendiente_pago: string;
 };
 
 const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem }) => {
@@ -38,16 +38,16 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem
     cliente: "",
     tipo: "",
     marca: "",
-    entry_date: "",
+    fch_entrada: "",
     modelo: "",
-    budget_date: "",
-    serial_num: "",
-    delivery_date: "",
-    failure: "",
-    repair: "",
-    spare_cost: "",
-    labor_cost: "",
-    pending_payment: "",
+    fch_presu: "",
+    num_serie: "",
+    fch_salida: "",
+    falla: "",
+    reparacion: "",
+    costo_repuesto: "",
+    costo_mano_obra: "",
+    pendiente_pago: "",
   })
 
   useEffect(() => {
@@ -57,16 +57,16 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem
         cliente: selectedItem.cliente || "-",
         tipo: selectedItem.tipo || "-",
         marca: selectedItem.marca || "-",
-        entry_date: selectedItem.entry_date || "-",
+        fch_entrada: selectedItem.fch_entrada || "-",
         modelo: selectedItem.modelo || "-",
-        budget_date: selectedItem.budget_date || "-",
-        serial_num: selectedItem.serial_num || "-",
-        delivery_date: selectedItem.delivery_date || "-",
-        failure: selectedItem.failure || "-",
-        repair: selectedItem.repair || "-",
-        spare_cost: selectedItem.spare_cost?.toString() || "-",
-        labor_cost: selectedItem.labor_cost?.toString() || "-",
-        pending_payment: selectedItem.pending_payment?.toString() || "-",
+        fch_presu: selectedItem.fch_presu || "-",
+        num_serie: selectedItem.num_serie || "-",
+        fch_salida: selectedItem.fch_salida || "-",
+        falla: selectedItem.falla || "-",
+        reparacion: selectedItem.reparacion || "-",
+        costo_repuesto: selectedItem.costo_repuesto?.toString() || "-",
+        costo_mano_obra: selectedItem.costo_mano_obra?.toString() || "-",
+        pendiente_pago: selectedItem.pendiente_pago?.toString() || "-",
       });
     }
   }, [selectedItem]);
@@ -100,9 +100,9 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem
   const handleSave = () => {
     const formattedFormData = {
       ...formData,
-      entry_date: formatDate(formData.entry_date), 
-      delivery_date: formatDate(formData.delivery_date),
-      budget_date: formatDate(formData.budget_date),
+      fch_entrada: formatDate(formData.fch_entrada), 
+      fch_salida: formatDate(formData.fch_salida),
+      fch_presu: formatDate(formData.fch_presu),
     };
     setFormData(formattedFormData);
     setShowPopup(true);
@@ -157,31 +157,31 @@ const DetailModal: React.FC<DetailModalProps> = ({ selectedItem, setSelectedItem
         {/* Second Row */}
         <div className="grid grid-cols-2 gap-4 mt-4 cursor-default">
           <Field label="Marca" name='marca' onChange={handleChange} value={formData.marca} isEditing={editMode} />
-          <Field label="Fecha de Entrada" name='entry_date' onChange={handleChange} value={formData.entry_date} isEditing={editMode} />
+          <Field label="Fecha de Entrada" name='fch_entrada' onChange={handleChange} value={formData.fch_entrada} isEditing={editMode} />
         </div>
         {/* Third Row */}
         <div className="grid grid-cols-2 gap-4 mt-4 cursor-default">
           <Field label="Modelo" name='modelo' onChange={handleChange} value={formData.modelo} isEditing={editMode} />
-          <Field label="Fecha de Presupuesto" name='budget_date' onChange={handleChange} value={formData.budget_date} isEditing={editMode} />
+          <Field label="Fecha de Presupuesto" name='fch_presu' onChange={handleChange} value={formData.fch_presu} isEditing={editMode} />
         </div>
         {/* Fourth Row */}
         <div className="grid grid-cols-2 gap-4 mt-4 cursor-default">
-          <Field label="N° Serie" name='serial_num' onChange={handleChange} value={formData.serial_num} isEditing={editMode} />
-          <Field label="Fecha de Salida" name='delivery_date' onChange={handleChange} value={formData.delivery_date} isEditing={editMode} />
+          <Field label="N° Serie" name='serial_num' onChange={handleChange} value={formData.num_serie} isEditing={editMode} />
+          <Field label="Fecha de Salida" name='fch_salida' onChange={handleChange} value={formData.fch_salida} isEditing={editMode} />
         </div>
         {/* Fifth Row */}
         <div className="mt-4 cursor-default">
-          <Field label="Falla" value={formData.failure} height="h-20" itemcenter scrollable isEditing={editMode} name="failure" onChange={handleChange} />
+          <Field label="Falla" value={formData.falla} height="h-20" itemcenter scrollable isEditing={editMode} name="falla" onChange={handleChange} />
         </div>
         {/* Sixth Row */}
         <div className="mt-4 cursor-default">
-          <Field label="Reparacion" value={formData.repair} height="h-20" itemcenter scrollable isEditing={editMode} name="repair" onChange={handleChange} />
+          <Field label="Reparacion" value={formData.reparacion} height="h-20" itemcenter scrollable isEditing={editMode} name="reparacion" onChange={handleChange} />
         </div>
         {/* Seventh Row */}
         <div className="flex justify-start gap-5 mt-6 cursor-default">
-          <Field label="Costo de repuesto" name="spare_cost" onChange={handleChange} value={formData.spare_cost.toString()} isEditing={editMode} />
-          <Field label="Mano de obra" name="labor_cost" onChange={handleChange} value={formData.labor_cost.toString()} isEditing={editMode} />
-          <Field label="Debe" name="pending_payment" onChange={handleChange} value={formData.pending_payment.toString()} isEditing={editMode} />
+          <Field label="Costo de repuesto" name="costo_repuesto" onChange={handleChange} value={formData.costo_repuesto.toString()} isEditing={editMode} />
+          <Field label="Mano de obra" name="costo_mano_obra" onChange={handleChange} value={formData.costo_mano_obra.toString()} isEditing={editMode} />
+          <Field label="Debe" name="pendiente_pago" onChange={handleChange} value={formData.pendiente_pago.toString()} isEditing={editMode} />
         </div>
         {/* Edit Mode buttons */}
         {editMode && (

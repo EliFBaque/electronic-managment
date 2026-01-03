@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = (email: string, password: string) => {
     // Hacemos la llamada a la API para autenticar al usuario
-    fetch(`http://192.168.0.164:8000/api_token/login/`, {
+    fetch(`http://192.168.0.164:8000/api/auth/login/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

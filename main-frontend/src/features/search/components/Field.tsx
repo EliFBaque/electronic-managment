@@ -27,7 +27,7 @@ const Field: React.FC<FieldProps> = ({
 }) => {
     const dateFieldRef = useRef<HTMLInputElement>(null);
     
-    const isDateField = ["entry_date", "delivery_date", "budget_date"].includes(name || "");
+    const isDateField = ["fch_entrada", "fch_salida", "fch_presu"].includes(name || "");
 
     return (
         <div className="w-full">
